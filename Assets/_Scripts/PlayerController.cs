@@ -9,10 +9,11 @@ public class PlayerController : MonoBehaviour
     public float m_speed = 10;    // 控制小球移动的速度，即力的倍数
     public Text countText;
     private int count;
+
+    private Vector3 coinPosition = new Vector3(0,0,0);
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {        
         rb = GetComponent<Rigidbody>(); // 获取组件，即sphero小球
         count = 0;
         countText.text = "Count: " + count.ToString();
@@ -36,6 +37,10 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);  // 非激活
             count++;
             countText.text = "Count: " + count.ToString();
+            coinPosition[0] = Random.Range(-10f,10f);            
+            coinPosition[2] = Random.Range(-10f,10f); 
+            other.transform.position = coinPosition;
+            other.gameObject.SetActive(true);
         }
         
     }
